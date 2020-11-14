@@ -1,0 +1,5 @@
+name: mOneSleep
+main: com.github.matt4499.monesleep.Main
+version: 0.1
+api-version: 1.16
+description: Allows one player to sleep to skip nighttime & weather.
