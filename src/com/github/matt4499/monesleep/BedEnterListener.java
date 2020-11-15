@@ -21,9 +21,14 @@ private boolean debounce = false; //debounce to prevent multiple people triggeri
 				public void run() { //what to run once the delay is up
 					if(event.getPlayer().isSleeping()) { //make sure the player is still sleeping, and didnt leave the bed
 						Bukkit.getServer().getConsoleSender().sendMessage("[mOneSleep] " + event.getPlayer().getDisplayName() + " is still sleeping. changing time...");
-						event.getPlayer().getWorld().setTime(0);
-						event.getPlayer().getWorld().setStorm(false);
-						Bukkit.getServer().broadcastMessage(event.getPlayer().getDisplayName() + " slept and skipped night time/reset weather!"); //anounce the change
+						if(Main.SkipWeather) {
+							event.getPlayer().getWorld().setTime(0);
+							event.getPlayer().getWorld().setStorm(false);
+							Bukkit.getServer().broadcastMessage(event.getPlayer().getDisplayName() + " slept and skipped night time & weather!");
+						} else {
+							event.getPlayer().getWorld().setTime(0);
+							Bukkit.getServer().broadcastMessage(event.getPlayer().getDisplayName() + " slept and skipped night time!");
+						}
 						debounce = false; //reset the debounce, the next event will be at night time anyways /shrug
 					} else {
 						Bukkit.getServer().getConsoleSender().sendMessage("[mOneSleep] " + event.getPlayer().getDisplayName() + " got out of bed. not changing time.");
